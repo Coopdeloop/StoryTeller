@@ -28,6 +28,10 @@
             android:name=".ReadActivity"
             android:label="@string/title_activity_write" >
         </activity>
+        <activity
+            android:name=".WriteActivity"
+            android:label="@string/title_activity_write" >
+        </activity>
     </application>
 
 </manifest>

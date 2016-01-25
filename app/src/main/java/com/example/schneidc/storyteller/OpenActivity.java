@@ -1,17 +1,54 @@
 package com.example.schneidc.storyteller;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class OpenActivity extends ActionBarActivity {
+
+    private Button mCreateButton;
+    private Button mJoinButton;
+    private Button mReadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open);
+
+        mCreateButton = (Button)findViewById(R.id.create_button);
+        mJoinButton = (Button)findViewById(R.id.join_button);
+        mReadButton=(Button)findViewById(R.id.read_button);
+
+        mCreateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OpenActivity.this, CreateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mJoinButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(OpenActivity.this, JoinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mReadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(OpenActivity.this, ReadActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 

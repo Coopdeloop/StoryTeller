@@ -25,7 +25,7 @@
             android:label="@string/title_activity_create" >
         </activity>
         <activity
-            android:name=".WriteActivity"
+            android:name=".ReadActivity"
             android:label="@string/title_activity_write" >
         </activity>
     </application>

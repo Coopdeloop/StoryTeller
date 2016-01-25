@@ -1,31 +1,47 @@
 package com.example.schneidc.storyteller;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class JoinActivity extends ActionBarActivity {
+public class WriteActivity extends ActionBarActivity {
 
-    private Button mStartWrite;
+
+    private TextView mTitleView;
+    private TextView mStoryView;
+    private EditText mInputText;
+    private Button mSubmitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join);
+        setContentView(R.layout.activity_write);
 
-        mStartWrite = (Button)findViewById(R.id.startWrite);
-        mStartWrite.setOnClickListener(new View.OnClickListener() {
+        mTitleView = (TextView)findViewById(R.id.titleView);
+        mStoryView = (TextView)findViewById(R.id.storyText);
+        mInputText = (EditText)findViewById(R.id.inputText);
+        mSubmitButton = (Button)findViewById(R.id.submitButton);
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(JoinActivity.this, WriteActivity.class);
-                startActivity(intent);
+                String newSentence = mInputText.getText().toString();
+                mStoryView.append(" " + newSentence);
             }
         });
+
+        mStoryView.setMovementMethod(new ScrollingMovementMethod());
+
+
+
+
+
 
 
     }
@@ -34,7 +50,7 @@ public class JoinActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_join, menu);
+        getMenuInflater().inflate(R.menu.menu_write, menu);
         return true;
     }
 

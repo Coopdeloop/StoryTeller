@@ -11,17 +11,7 @@
                 android:background="#ff000000"
                 android:weightSum="1">
 
-<<<<<<< HEAD
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_marginTop="92dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
-=======
+
     <RelativeLayout
         android:orientation="horizontal"
 
@@ -59,4 +49,4 @@
             android:layout_alignStart="@+id/join_button"/>
     </RelativeLayout>
 </LinearLayout>
->>>>>>> b840317d6024ff7962d1c041d7a2168cf84dc143
+

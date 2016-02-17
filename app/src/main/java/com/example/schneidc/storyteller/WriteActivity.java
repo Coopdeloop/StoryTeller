@@ -31,8 +31,9 @@ public class WriteActivity extends ActionBarActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newSentence = mInputText.getText().toString();
+                String newSentence = mInputText.getText().toString().trim();
                 mStoryView.append(" " + newSentence);
+                mInputText.setText("");
             }
         });
 

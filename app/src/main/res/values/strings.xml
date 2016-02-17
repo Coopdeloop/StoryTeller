@@ -13,5 +13,8 @@
     <string name="login_error_message">Wrong username or password</string>
     <string name="error_title">Error!</string>
     <string name="empty_error_message">Some of the parameters may be empty</string>
+    <string name="password_confirmation_message">Your password does not match</string>
+    <string name="password_length_message">password must be at least six characters</string>
+    <string name="password_username_message">Password and username cannot be the same</string>
 
 </resources>

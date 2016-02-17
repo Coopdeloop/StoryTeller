@@ -51,6 +51,41 @@ public class SignUpActivity extends ActionBarActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }
+                else
+                {
+                    if(password.length() < 6)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                        builder.setMessage(R.string.password_length_message);
+                        builder.setTitle(R.string.error_title);
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+
+
+                    else if (password.equals(username))
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                        builder.setMessage(R.string.password_username_message);
+                        builder.setTitle(R.string.error_title);
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+
+                    else if(!password.equals(conPass))
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                        builder.setMessage(R.string.password_confirmation_message);
+                        builder.setTitle(R.string.error_title);
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+
+
+                }
 
 
 

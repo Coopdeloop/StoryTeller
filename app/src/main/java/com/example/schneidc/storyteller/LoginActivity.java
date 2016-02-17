@@ -1,5 +1,6 @@
 package com.example.schneidc.storyteller;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -29,11 +30,57 @@ public class LoginActivity extends ActionBarActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, OpenActivity.class);
-                startActivity(intent);
+
+                String username = mUsernameText.getText().toString();
+                String password = mPasswordText.getText().toString();
+
+                username = username.trim();
+                password = password.trim();
+
+                if (username.isEmpty() || password.isEmpty()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage(R.string.login_error_message);
+                    builder.setTitle(R.string.login_error_title);
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else {
+                    //verify user against the Parse database USER table
+                    //make the progress bar visible in the action bar
+                    setProgressBarIndeterminateVisibility(true);
+
+                    //call the log in Parse method
+                    MyLogInCallback callback = new MyLogInCallback();
+                    ParseUser.logInInBackground(username, password, callback);
+                }
             }
         });
 
+
+    }
+
+    private class MyLogInCallback implements LogInCallback {
+
+        @Override
+        public void done(ParseUser user, ParseException e) {
+            setProgressBarIndeterminateVisibility(false);
+
+            if (e == null) {
+                // Success! Start the Trips activity
+                Intent intent = new Intent(LoginActivity.this, TripListActivity.class);
+                startActivity(intent);
+            }
+            else {
+                // Error! display error message to user
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage(e.getMessage());
+                builder.setTitle(R.string.login_error_title);
+                builder.setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
 
     }
 

@@ -1,17 +1,65 @@
 package com.example.schneidc.storyteller;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class SignUpActivity extends ActionBarActivity {
+    private EditText mUsername;
+    private EditText mPassword;
+    private EditText mConfirmPass;
+    private Button mSubmit;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        mUsername = (EditText)findViewById(R.id.sign_up_user);
+        mPassword = (EditText)findViewById(R.id.sign_up_pass);
+        mConfirmPass = (EditText)findViewById(R.id.sign_up_confirm);
+
+        mSubmit = (Button)findViewById(R.id.sign_up_button);
+        mSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String username = mUsername.getText().toString();
+                String password = mPassword.getText().toString();
+                String conPass = mConfirmPass.getText().toString();
+
+                password = password.trim();
+                conPass = conPass.trim();
+                username = username.trim();
+
+                if(username.isEmpty() || password.isEmpty() || conPass.isEmpty())
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                    builder.setMessage(R.string.empty_error_message);
+                    builder.setTitle(R.string.error_title);
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
+
+
+
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

@@ -9,6 +9,9 @@
     <string name="title_activity_write">WriteActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
-    <string name="login_button">Login</string>
+    <string name="login_button">Submit</string>
+    <string name="login_error_message">Wrong username or password</string>
+    <string name="error_title">Error!</string>
+    <string name="empty_error_message">Some of the parameters may be empty</string>
 
 </resources>

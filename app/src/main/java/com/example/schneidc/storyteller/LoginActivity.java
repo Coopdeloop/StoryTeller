@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -40,7 +44,7 @@ public class LoginActivity extends ActionBarActivity {
                 if (username.isEmpty() || password.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setMessage(R.string.login_error_message);
-                    builder.setTitle(R.string.login_error_title);
+                    builder.setTitle(R.string.error_title);
                     builder.setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
@@ -68,14 +72,14 @@ public class LoginActivity extends ActionBarActivity {
 
             if (e == null) {
                 // Success! Start the Trips activity
-                Intent intent = new Intent(LoginActivity.this, TripListActivity.class);
+                Intent intent = new Intent(LoginActivity.this, OpenActivity.class);
                 startActivity(intent);
             }
             else {
                 // Error! display error message to user
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                 builder.setMessage(e.getMessage());
-                builder.setTitle(R.string.login_error_title);
+                builder.setTitle(R.string.error_title);
                 builder.setPositiveButton(android.R.string.ok, null);
                 AlertDialog dialog = builder.create();
                 dialog.show();

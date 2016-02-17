@@ -8,9 +8,28 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="com.example.schneidc.storyteller.SignUpActivity">
 
-    <TextView
-        android:text="@string/hello_world"
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:id="@+id/sign_up_user"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:id="@+id/sign_up_pass"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:id="@+id/sign_up_confirm"/>
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/login_button"
+        android:id="@+id/sign_up_button"/>
+
 
 </RelativeLayout>

@@ -16,5 +16,6 @@
     <string name="password_confirmation_message">Your password does not match</string>
     <string name="password_length_message">password must be at least six characters</string>
     <string name="password_username_message">Password and username cannot be the same</string>
+    <string name="signup_error_title">Sign Up Error!</string>
 
 </resources>

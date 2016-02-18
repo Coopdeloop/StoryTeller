@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
 
 public class SignUpActivity extends ActionBarActivity {
     private EditText mUsername;
@@ -83,20 +87,45 @@ public class SignUpActivity extends ActionBarActivity {
                         AlertDialog dialog = builder.create();
                         dialog.show();
                     }
+                    else
+                    {
+                        ParseUser newUser = new ParseUser();
+                        newUser.setUsername(username);
+                        newUser.setPassword(password);
+                        MySignUpCallback callback = new MySignUpCallback();
+                        newUser.signUpInBackground(callback);
+
+                    }
 
 
                 }
 
-
-
-
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                startActivity(intent);
             }
         });
 
     }
 
+    private class MySignUpCallback implements SignUpCallback {
+        @Override
+        public void done(ParseException e) {
+            setProgressBarIndeterminateVisibility(false);
+
+            if (e == null) {
+                // Success! go to the login screen
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+            else {
+                // Error! display the error message returned from Parse
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                builder.setMessage(e.getMessage());
+                builder.setTitle(R.string.signup_error_title);
+                builder.setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

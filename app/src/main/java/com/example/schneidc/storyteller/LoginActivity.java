@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -21,6 +22,7 @@ public class LoginActivity extends ActionBarActivity {
     private EditText mUsernameText;
     private EditText mPasswordText;
     private Button mSubmit;
+    private TextView mSignUpText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class LoginActivity extends ActionBarActivity {
         mUsernameText = (EditText)findViewById(R.id.username);
         mPasswordText = (EditText)findViewById(R.id.password);
         mSubmit = (Button)findViewById(R.id.login_button);
+        mSignUpText = (TextView)findViewById(R.id.sign_up_textview);
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +64,13 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
+        mSignUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

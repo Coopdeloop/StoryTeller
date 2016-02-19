@@ -19,17 +19,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:id="@+id/sign_up_pass"/>
+        android:id="@+id/sign_up_pass"
+        android:layout_below="@+id/sign_up_user"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirm Password"
-        android:id="@+id/sign_up_confirm"/>
+        android:id="@+id/sign_up_confirm"
+        android:layout_below="@+id/sign_up_pass"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="86dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_button"
-        android:id="@+id/sign_up_button"/>
+        android:id="@+id/sign_up_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/sign_up_user"
+        android:layout_alignEnd="@+id/sign_up_user"
+        android:layout_marginRight="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp"/>
 
 
 </RelativeLayout>

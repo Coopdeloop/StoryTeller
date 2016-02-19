@@ -16,10 +16,7 @@ public class StoryTellerApplication extends Application {
         @Override
         public void onCreate() {
             super.onCreate();
-
             Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
-
-
         }
 
     }

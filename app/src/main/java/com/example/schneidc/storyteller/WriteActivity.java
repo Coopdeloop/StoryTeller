@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
+import java.io.Writer;
+import java.util.ArrayList;
+
 
 public class WriteActivity extends ActionBarActivity {
 
@@ -18,11 +23,15 @@ public class WriteActivity extends ActionBarActivity {
     private TextView mStoryView;
     private EditText mInputText;
     private Button mSubmitButton;
+    private Story mStory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
+
+        mStory = new Story("Story Title");
 
         mTitleView = (TextView)findViewById(R.id.titleView);
         mStoryView = (TextView)findViewById(R.id.storyText);
@@ -31,19 +40,14 @@ public class WriteActivity extends ActionBarActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newSentence = mInputText.getText().toString().trim();
-                mStoryView.append(" " + newSentence);
+                Entry entry = new Entry(ParseUser.getCurrentUser().getString("username"), mInputText.getText().toString(), mStory.getEntryNumber());
+                mStory.addEntry(entry);
                 mInputText.setText("");
+                mStoryView.setText(mStory.getStory());
             }
         });
 
         mStoryView.setMovementMethod(new ScrollingMovementMethod());
-
-
-
-
-
-
 
     }
 

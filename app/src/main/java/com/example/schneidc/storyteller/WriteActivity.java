@@ -31,9 +31,10 @@ public class WriteActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
-        mStory = new Story("Story Title");
+        mStory = (Story)getIntent().getSerializableExtra("story");
 
         mTitleView = (TextView)findViewById(R.id.titleView);
+        mTitleView.setText(mStory.getTitle());
         mStoryView = (TextView)findViewById(R.id.storyText);
         mInputText = (EditText)findViewById(R.id.inputText);
         mSubmitButton = (Button)findViewById(R.id.submitButton);

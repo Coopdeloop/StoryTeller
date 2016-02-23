@@ -1,13 +1,15 @@
 package com.example.schneidc.storyteller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by wysockij00 on 2/22/16.
  */
-public class Story {
+public class Story implements Serializable{
     private ArrayList<Entry> mEntries;
     private String mTitle;
+    private String mPassword;
 
     public Story(String title) {
         mTitle = title;
@@ -32,5 +34,9 @@ public class Story {
 
         }
         return builder.toString();
+    }
+
+    public String getTitle() {
+        return mTitle;
     }
 }

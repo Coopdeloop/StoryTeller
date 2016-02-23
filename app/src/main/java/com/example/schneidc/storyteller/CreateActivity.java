@@ -18,6 +18,7 @@ public class CreateActivity extends ActionBarActivity {
     private boolean password;
     private EditText mPassword;
     private CheckBox mCheckPassword;
+    private Story mStory;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -48,7 +49,9 @@ public class CreateActivity extends ActionBarActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mStory = new Story(mTitle.getText().toString());
                 Intent intent = new Intent(CreateActivity.this, WriteActivity.class);
+                intent.putExtra("story", mStory);
                 startActivity(intent);
 
             }

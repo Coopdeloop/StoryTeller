@@ -24,8 +24,9 @@
         android:hint="Password (Optional)"
         android:id="@+id/editPassword"
         android:layout_below="@+id/editTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"/>
+        android:layout_toRightOf="@+id/check_password"
+        android:layout_toEndOf="@+id/check_password"
+        android:layout_marginTop="86dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -35,4 +36,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="58dp"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="password?"
+        android:id="@+id/check_password"
+        android:checked="false"
+        android:layout_alignBaseline="@+id/editPassword"
+        android:layout_alignBottom="@+id/editPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>

@@ -1,17 +1,59 @@
 package com.example.schneidc.storyteller;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 
 public class CreateActivity extends ActionBarActivity {
 
+    private Button mSubmit;
+    private EditText mTitle;
+    private boolean password;
+    private EditText mPassword;
+    private CheckBox mCheckPassword;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+        mSubmit = (Button)findViewById(R.id.submit_button);
+        mTitle = (EditText)findViewById(R.id.editTitle);
+        mPassword = (EditText)findViewById(R.id.editPassword);
+        mCheckPassword = (CheckBox)findViewById(R.id.check_password);
+        mPassword.setVisibility(View.INVISIBLE);
+
+
+
+        mCheckPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mCheckPassword.isChecked())
+                {
+                    mPassword.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    mPassword.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        mSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateActivity.this, WriteActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 
@@ -36,4 +78,9 @@ public class CreateActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
 }

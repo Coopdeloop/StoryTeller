@@ -36,18 +36,11 @@ public class WriteActivity extends ActionBarActivity {
 
         mTitle = getIntent().getStringExtra("title");
         ParseProxyObject ppo = (ParseProxyObject) getIntent().getSerializableExtra("parseObject");
-
-
-
-
         mStory = new Story(mTitle);
-
         mTitleView = (TextView)findViewById(R.id.titleView);
-
         mStoryView = (TextView)findViewById(R.id.storyText);
         mInputText = (EditText)findViewById(R.id.inputText);
         mSubmitButton = (Button)findViewById(R.id.submitButton);
-
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

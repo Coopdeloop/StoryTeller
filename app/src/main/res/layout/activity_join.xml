@@ -9,12 +9,5 @@
                 tools:context="com.example.schneidc.storyteller.JoinActivity">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Writing"
-        android:id="@+id/startWrite"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="102dp"/>
+
 </RelativeLayout>

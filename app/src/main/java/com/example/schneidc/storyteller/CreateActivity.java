@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.parse.ParseObject;
+
 
 public class CreateActivity extends ActionBarActivity {
 
@@ -19,6 +21,7 @@ public class CreateActivity extends ActionBarActivity {
     private EditText mPassword;
     private CheckBox mCheckPassword;
     private Story mStory;
+    private static final int EXTRA_GET_STORY = 0;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -49,9 +52,11 @@ public class CreateActivity extends ActionBarActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mStory = new Story(mTitle.getText().toString());
+                ParseObject fullStory = new ParseObject("FullStory");
+                ParseProxyObject ppo = new ParseProxyObject(fullStory);
                 Intent intent = new Intent(CreateActivity.this, WriteActivity.class);
-                intent.putExtra("story", mStory);
+                intent.putExtra("title", mTitle.getText().toString());
+                intent.putExtra("parseObject", ppo);
                 startActivity(intent);
 
             }

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.Writer;
@@ -24,6 +26,7 @@ public class WriteActivity extends ActionBarActivity {
     private EditText mInputText;
     private Button mSubmitButton;
     private Story mStory;
+    private String mTitle;
 
 
     @Override
@@ -31,20 +34,28 @@ public class WriteActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
-        mStory = (Story)getIntent().getSerializableExtra("story");
+        mTitle = getIntent().getStringExtra("title");
+        ParseProxyObject ppo = (ParseProxyObject) getIntent().getSerializableExtra("parseObject");
+
+
+
+
+        mStory = new Story(mTitle);
 
         mTitleView = (TextView)findViewById(R.id.titleView);
-        mTitleView.setText(mStory.getTitle());
+
         mStoryView = (TextView)findViewById(R.id.storyText);
         mInputText = (EditText)findViewById(R.id.inputText);
         mSubmitButton = (Button)findViewById(R.id.submitButton);
+
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Entry entry = new Entry(ParseUser.getCurrentUser().getString("username"), mInputText.getText().toString(), mStory.getEntryNumber());
                 mStory.addEntry(entry);
-                mInputText.setText("");
                 mStoryView.setText(mStory.getStory());
+
+                mInputText.setText("");
             }
         });
 

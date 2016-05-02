@@ -27,6 +27,7 @@ public class WriteActivity extends ActionBarActivity {
     private Button mSubmitButton;
     private Story mStory;
     private String mTitle;
+    private ParseObject fullStory;
 
 
     @Override
@@ -35,9 +36,15 @@ public class WriteActivity extends ActionBarActivity {
         setContentView(R.layout.activity_write);
 
         mTitle = getIntent().getStringExtra("title");
-        ParseProxyObject ppo = (ParseProxyObject) getIntent().getSerializableExtra("parseObject");
         mStory = new Story(mTitle);
+        if(!mTitle.isEmpty()){
+            fullStory = new ParseObject("Story");
+            fullStory.put("Title", mTitle);
+            fullStory.saveInBackground();
+
+        }
         mTitleView = (TextView)findViewById(R.id.titleView);
+        mTitleView.setText(mTitle);
         mStoryView = (TextView)findViewById(R.id.storyText);
         mInputText = (EditText)findViewById(R.id.inputText);
         mSubmitButton = (Button)findViewById(R.id.submitButton);
@@ -46,6 +53,9 @@ public class WriteActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Entry entry = new Entry(ParseUser.getCurrentUser().getString("username"), mInputText.getText().toString(), mStory.getEntryNumber());
                 mStory.addEntry(entry);
+
+                fullStory.put("FullStory", mStory.getEntries());
+                fullStory.saveInBackground();
                 mStoryView.setText(mStory.getStory());
 
                 mInputText.setText("");

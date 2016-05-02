@@ -1,12 +1,14 @@
 package com.example.schneidc.storyteller;
 
+import com.parse.ParseObject;
+
 import java.util.ArrayList;
 
 /**
  * Created by wysockij00 on 2/22/16.
  */
 public class Story {
-    private ArrayList<Entry> mEntries;
+    private ArrayList<ParseObject> mEntries;
     private String mTitle;
 
     public Story(String title) {
@@ -15,7 +17,7 @@ public class Story {
     }
 
     public void addEntry(Entry e){
-        mEntries.add(e);
+        mEntries.add(e.toParseObject());
     }
 
     public void deleteEntry(Entry e){
@@ -26,10 +28,14 @@ public class Story {
         return mEntries.size();
     }
 
+    public ArrayList<ParseObject> getEntries(){
+        return mEntries;
+    }
+
     public String getStory(){
         StringBuilder builder = new StringBuilder();
-        for (Entry entry : mEntries){
-            builder.append(entry.getContents() + " ");
+        for (ParseObject entry : mEntries){
+            builder.append(entry.getString("Content") + " ");
 
         }
         return builder.toString();

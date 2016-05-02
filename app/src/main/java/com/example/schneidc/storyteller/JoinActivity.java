@@ -9,18 +9,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 
 public class JoinActivity extends ActionBarActivity {
 
-private ArrayList<String> mStories;
+    private ArrayList<String> mStories;
+    private ListView mStoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        mStoryList = (ListView)findViewById(R.id.storyList);
 
 
 

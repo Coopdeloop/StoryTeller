@@ -1,5 +1,6 @@
 package com.example.schneidc.storyteller;
 
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -34,8 +35,9 @@ public class ParseProxyObject implements Serializable {
             } else if(classType == ParseUser.class) {
                 ParseProxyObject parseUserObject = new ParseProxyObject((ParseObject)object.get(key));
                 values.put(key, parseUserObject);
-            } else {
-                // You might want to add more conditions here, for embedded ParseObject, ParseFile, etc.
+            } else if(classType == ParseObject.class) {
+                ParseProxyObject parseObject = new ParseProxyObject((ParseObject)object.get(key));
+                values.put(key, parseObject);
             }
         }
     }
@@ -76,6 +78,15 @@ public class ParseProxyObject implements Serializable {
         if(has(key)) {
             return (ParseProxyObject) values.get(key);
         } else {
+            return null;
+        }
+    }
+
+    public ParseObject getParseObject(String key){
+        if(has(key)){
+            return (ParseObject) values.get(key);
+        }
+        else{
             return null;
         }
     }

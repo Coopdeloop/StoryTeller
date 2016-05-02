@@ -1,5 +1,9 @@
 package com.example.schneidc.storyteller;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 /**
  * Created by wysockij00 on 2/22/16.
  */
@@ -15,6 +19,7 @@ public class Entry {
         mContents = contents;
     }
 
+
     public String getCreator() {
         return mCreator;
     }
@@ -25,5 +30,13 @@ public class Entry {
 
     public String getContents() {
         return mContents;
+    }
+
+    public ParseObject toParseObject(){
+        ParseObject obj = new ParseObject("Entry");
+        obj.put("creator", mCreator);
+        obj.put("Content", mContents);
+        obj.put("position", mId);
+        return obj;
     }
 }

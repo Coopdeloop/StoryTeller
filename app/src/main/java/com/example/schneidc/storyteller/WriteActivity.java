@@ -28,6 +28,7 @@ public class WriteActivity extends ActionBarActivity {
     private Story mStory;
     private String mTitle;
     private ParseObject fullStory;
+    private String mText;
 
 
     @Override
@@ -36,16 +37,20 @@ public class WriteActivity extends ActionBarActivity {
         setContentView(R.layout.activity_write);
 
         mTitle = getIntent().getStringExtra("title");
+        mText = getIntent().getStringExtra("text");
         mStory = new Story(mTitle);
         if(!mTitle.isEmpty()){
             fullStory = new ParseObject("Story");
             fullStory.put("Title", mTitle);
             fullStory.saveInBackground();
-
+        }
+        if(!mTitle.isEmpty() && !mText.isEmpty()){
+            fullStory.put("Title", mTitle);
         }
         mTitleView = (TextView)findViewById(R.id.titleView);
         mTitleView.setText(mTitle);
         mStoryView = (TextView)findViewById(R.id.storyText);
+        mStoryView.setText(mText);
         mInputText = (EditText)findViewById(R.id.inputText);
         mSubmitButton = (Button)findViewById(R.id.submitButton);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {

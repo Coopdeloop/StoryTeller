@@ -3,6 +3,7 @@ package com.example.schneidc.storyteller;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class WriteActivity extends ActionBarActivity {
 
 
+    private static final String TAG = WriteActivity.class.getName();
     private TextView mTitleView;
     private TextView mStoryView;
     private EditText mInputText;
@@ -39,14 +41,12 @@ public class WriteActivity extends ActionBarActivity {
         mTitle = getIntent().getStringExtra("title");
         mText = getIntent().getStringExtra("text");
         mStory = new Story(mTitle);
-        if(!mTitle.isEmpty()){
+        if(mTitle.isEmpty() && mText.isEmpty()){
             fullStory = new ParseObject("Story");
             fullStory.put("Title", mTitle);
             fullStory.saveInBackground();
         }
-        if(!mTitle.isEmpty() && !mText.isEmpty()){
-            fullStory.put("Title", mTitle);
-        }
+
         mTitleView = (TextView)findViewById(R.id.titleView);
         mTitleView.setText(mTitle);
         mStoryView = (TextView)findViewById(R.id.storyText);
@@ -57,7 +57,9 @@ public class WriteActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Entry entry = new Entry(ParseUser.getCurrentUser().getString("username"), mInputText.getText().toString(), mStory.getEntryNumber());
+                Log.i(TAG, "In activity,the entry is: " + entry.toString());
                 mStory.addEntry(entry);
+
 
                 fullStory.put("FullStory", mStory.getEntries());
                 fullStory.saveInBackground();

@@ -27,6 +27,7 @@ public class JoinActivity extends ActionBarActivity {
     private ListView mStoryList;
     private TextView mPageTitle;
     private ArrayList<String> fullStory = new ArrayList<>();
+    private StringBuilder fullStoryText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +45,22 @@ public class JoinActivity extends ActionBarActivity {
         mStoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String title = adapter.getItem(mStoryList.getPositionForView(view)).getString("Title");
+                final String title = adapter.getItem(mStoryList.getPositionForView(view)).getString("Title");
                 @SuppressWarnings("unchecked") ArrayList<ParseObject> storyPointers = (ArrayList<ParseObject>) adapter.getItem(mStoryList.getPositionForView(view)).get("FullStory");
-
-                final StringBuilder story = new StringBuilder();
-                final ArrayList<String> storyStrings = new ArrayList<>(storyPointers.size());
-
+                fullStoryText = new StringBuilder();
                 for (int i = 0; i < storyPointers.size(); i++) {
 
                     try {
                         ParseQuery.getQuery("Entry").get(storyPointers.get(i).getObjectId()).fetchInBackground(new GetCallback<ParseObject>() {
                             @Override
                             public void done(ParseObject parseObject, ParseException e) {
-                                Log.i(TAG, "Content is: " + parseObject.get("Content"));
-                                story.append(parseObject.getString("Content"));
-                                Log.i(TAG, storyStrings.toString());
-                                storyStrings.set(parseObject.getInt("Position"),parseObject.getString("Content"));
+                                Log.d(TAG, parseObject.get("Content").toString());
+                                fullStoryText.append(parseObject.get("Content").toString() + " ");
+                                Log.i(TAG, fullStoryText.toString());
+                                Intent intent = new Intent(getBaseContext(), WriteActivity.class);
+                                intent.putExtra("title", title);
+                                intent.putExtra("text", fullStoryText.toString());
+                                startActivity(intent);
                             }
                         });
                     } catch (ParseException e) {
@@ -67,10 +68,7 @@ public class JoinActivity extends ActionBarActivity {
                     }
                 }
 
-                Intent intent = new Intent(getBaseContext(), WriteActivity.class);
-                intent.putExtra("title", title);
-                intent.putExtra("text", fullStory);
-                //startActivity(intent);
+
             }
         });
     }
